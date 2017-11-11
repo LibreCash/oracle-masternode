@@ -63,3 +63,10 @@ export const nodeOp = payload => ({
 	event: 'nodeOp',
 	payload
 })
+
+export const masterOn = payload => ({
+	type: 'SEND_MESSAGE',
+	event: 'masterOn',
+	payload
+})
+

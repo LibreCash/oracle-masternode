@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 
 import { Button } from 'react-bootstrap';
 
+import { nodeOp } from '../actions'
+
 class LightNode extends Component {
   componentWillReceiveProps(nextProps) {
 
   }
+
+  onStopClick() {
+    nodeOp({
+      code: 'onoff',
+      on: false 
+    })
+  }
+
   render() {
     var node = this.props.node;
 
@@ -21,6 +31,8 @@ class LightNode extends Component {
       text: 'Offline'
     }
 
+
+
     var fields = []
     for (let [k, field] of Object.entries(node)) {
       console.log(field)
@@ -32,6 +44,9 @@ class LightNode extends Component {
       fields.push(<div className=".MasterNode-label1">{k + ': ' + JSON.stringify(field)}</div>)
     }
 
+//disabled="{node.connected ? 'true' : 'false'}
+    //var prop = ['disabled']{...prop}
+
     return (
       <div className="LightNode">
         
@@ -40,7 +55,7 @@ class LightNode extends Component {
 
         {fields}
 
-        <Button bsStyle="danger">Stop</Button>
+        <Button bsStyle="danger" disabled={!node.connected} onClick={this.onStopClick}>Stop</Button>
       </div>
     );
   }

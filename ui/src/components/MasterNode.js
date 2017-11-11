@@ -4,10 +4,17 @@ import LightNode from './LightNode';
 
 import { Button } from 'react-bootstrap';
 
+import { masterOn } from '../actions'
+
 class MasterNode extends Component {
   componentWillReceiveProps(nextProps) {
 
   }
+
+  onStopClick() {
+    masterOn({ on: false })
+  }
+
   render() {
     var connected = this.props.ctx.connected ? {
       style: {
@@ -38,7 +45,7 @@ class MasterNode extends Component {
         
         {fields}
 
-        <Button bsStyle="danger">Stop</Button>
+        <Button bsStyle="danger" disabled={!this.props.ctx.connected} onClick={this.onStopClick}>Stop</Button>
         {lightNodes}
       </div>
     );
