@@ -11,6 +11,8 @@ export const [
 	NODE_OP_DONE,
 	EVENTS,
 
+	NOTIFICATION,
+
 	// masternode send
 	ADD_NODE,
 	REMOVE_NODE,
@@ -26,6 +28,7 @@ export const [
 	'NODE_REMOVED',
 	'NODE_OP_DONE',
 	'EVENTS',
+	'NOTIFICATION',
 	'ADD_NODE',
 	'REMOVE_NODE',
 	'NODE_OP',

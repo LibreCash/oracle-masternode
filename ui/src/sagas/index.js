@@ -12,7 +12,9 @@ import {
   MASTER_DISCONNECTED,
   MASTER_STATE,
 
-  NODES_LIST
+  NODES_LIST,
+
+  NOTIFICATION
 
 } from '../actions'
 
@@ -53,7 +55,11 @@ function createSocketChannel(socket) {
 					type = NODES_LIST
 					payload = e.nodes
 					break
-				case 'event':
+//				case 'event':
+				case 'notification':
+					type = NOTIFICATION
+					payload = e.notification
+					break
 				default:
 					return
 			}

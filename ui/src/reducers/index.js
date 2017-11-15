@@ -9,7 +9,8 @@ import {
   NODE_ADDED,
   NODE_REMOVED,
   NODE_OP_DONE,
-  EVENTS
+  EVENTS,
+  NOTIFICATION
 } from '../actions'
 
 const INITIAL_STATE = {
@@ -17,11 +18,14 @@ const INITIAL_STATE = {
 		connected: false,
 
 		master: {
-			id: -1,
-			lastUpdate: null,
-			lightNodesAlive: -1,
-			startTime: null,
-			uptime: -1
+			state: {
+				id: -1,
+				lastUpdate: null,
+				lightNodesAlive: -1,
+				startTime: null,
+				uptime: -1,
+			},
+			notifications: []
 		},
 
 		lightNodes: []
@@ -59,7 +63,10 @@ const startupReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				ctx: {
 					...state.ctx,
-					master: action.payload
+					master: {
+						...state.ctx.master,
+						state: action.payload
+					}
 				}
 			}
 		case NODES_LIST:
@@ -68,6 +75,20 @@ const startupReducer = (state = INITIAL_STATE, action) => {
 				ctx: {
 					...state.ctx,
 					lightNodes: action.payload
+				}
+			}
+		case NOTIFICATION:
+			return {
+				...state,
+				ctx: {
+					...state.ctx,
+					master: {
+						...state.ctx.master,
+						notifications: [
+							...state.ctx.master.notifications,
+							action.payload
+						]
+					}
 				}
 			}
 		default:
