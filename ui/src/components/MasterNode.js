@@ -1,28 +1,36 @@
-import React, { Component } from 'react';
-import { Button, Label, Grid, Row, Col } from 'react-bootstrap';
+import React, { Component } from 'react'
+import PropTypes from "prop-types"
+import { Button, Label, Grid, Row, Col } from 'react-bootstrap'
 
 import PriceChart from './PriceChart'
-import LightNode from './LightNode';
+import LightNode from './LightNode'
 
 import { ticketsNetToChart, renderObjectProps } from '../utils'
 
 import { masterOn } from '../actions'
 
 class MasterNode extends Component {
+  constructor(props, context) {
+    super()
+    console.log(context)
+  }
   componentWillReceiveProps(nextProps) {
 
   }
 
   onStopClick() {
-    masterOn('off')
+    const { dispatch } = this.context.store
+    dispatch( masterOn('off') )
   }
 
   onStartClick() {
-    masterOn('on')
+    const { dispatch } = this.context.store
+    dispatch( masterOn('on') )
   }
 
   onShutdownClick() {
-    masterOn('shutdown')
+    const { dispatch } = this.context.store
+    dispatch( masterOn('shutdown') )
   }
 
   render() {
@@ -41,9 +49,11 @@ class MasterNode extends Component {
 
     var fields = renderObjectProps(ctx.master.state)
 
-    var lightNodes = []
-    for (let node of ctx.lightNodes) {
-      lightNodes.push(<LightNode node={node}></LightNode>)
+    if (ctx.connected) {
+      var lightNodes = []
+      for (let node of ctx.lightNodes) {
+        lightNodes.push(<LightNode node={node}></LightNode>)
+      }
     }
 
     var data = ticketsNetToChart([])
@@ -65,11 +75,11 @@ class MasterNode extends Component {
               <div className="MasterNode-connected"style={connected.style}>{connected.text}</div>
             </Col>
             <Col xs={6} md={4}>
-              <Button className="MasterNode-button-shutdown pull-right" bsStyle="danger" disabled={!this.props.ctx.connected} onClick={this.onShutdownClick}>Shutdown</Button>
+              <Button className="MasterNode-button-shutdown pull-right" bsStyle="danger" disabled={!this.props.ctx.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
               {ctx.master.state.running ? 
-                  <Button className="MasterNode-button-stop pull-right" bsStyle="warning" disabled={!this.props.ctx.connected} onClick={this.onStopClick}>Stop</Button>
+                  <Button className="MasterNode-button-stop pull-right" bsStyle="warning" disabled={!this.props.ctx.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
                 :
-                  <Button className="MasterNode-button-start pull-right" bsStyle="success" disabled={!this.props.ctx.connected} onClick={this.onStartClick}>Start</Button>
+                  <Button className="MasterNode-button-start pull-right" bsStyle="success" disabled={!this.props.ctx.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
               }
             </Col>
           </Row>
@@ -92,8 +102,12 @@ class MasterNode extends Component {
 
         <PriceChart data={data} />
       </div>
-    );
+    )
   }
+}
+
+MasterNode.contextTypes = {
+  store: PropTypes.object.isRequired
 }
 
 export default MasterNode;

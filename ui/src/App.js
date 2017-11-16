@@ -15,8 +15,6 @@ class App extends Component {
     this.state = { ctx: { masterId: 0 } }
   }
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch( nodeOp({ test: true }) ) 
   }
 
   componentDidUpdate(prevProps) {

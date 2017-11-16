@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from "prop-types"
 
 import { Button } from 'react-bootstrap'
 
@@ -14,10 +15,8 @@ class LightNode extends Component {
   }
 
   onStopClick() {
-    nodeOp({
-      code: 'onoff',
-      on: false 
-    })
+    const { dispatch } = this.context.store
+    dispatch( nodeOp({ code: 'onoff', on: false }) )
   }
 
   render() {
@@ -51,12 +50,16 @@ class LightNode extends Component {
         {fields}
         {fieldsOptions}
 
-        <Button bsStyle="danger" disabled={!node.connected} onClick={this.onStopClick}>Stop</Button>
+        <Button bsStyle="danger" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
 
         <PriceChart data={data} />
       </div>
     )
   }
+}
+
+LightNode.contextTypes = {
+  store: PropTypes.object.isRequired
 }
 
 export default LightNode

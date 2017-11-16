@@ -6,7 +6,7 @@ export function ticketsNetToChart(tickets) {
     var data = []
     tickets.forEach((ticket) => {
       data.push({
-        date: new Date(ticket.timestamp), //new Date(i),
+        date: new Date(ticket.timestamp),
         open: ticket.low,
         high: ticket.high,
         low: ticket.low,
@@ -18,20 +18,6 @@ export function ticketsNetToChart(tickets) {
 }
 
 export function renderObjectProps(object, exclude = []) {
-/*    var fields = []
-    for (let [k, field] of Object.entries(object)) {
-      console.log(field)
-      if (!(k in exclude))
-        fields.push(
-        	<div className="ObjectProperty-item">
-	        	<div className="ObjectProperty-name">{k +': '}</div>
-	        	<div className="ObjectProperty-value">{JSON.stringify(field)}</div>
-        	</div>
-        )
-    }
-    return (<div className="ObjectProperty-container">
-    	{fields}
-    </div>)*/
     var fields = []
     for (let [k, field] of Object.entries(object)) {
       console.log(field)
