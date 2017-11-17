@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
-import { Button, Label, Grid, Row, Col } from 'react-bootstrap'
+import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import PriceChart from './PriceChart'
 import LightNode from './LightNode'
@@ -14,8 +14,19 @@ class MasterNode extends Component {
     super()
     console.log(context)
   }
+
   componentWillReceiveProps(nextProps) {
 
+  }
+
+  componentWillUpdate() {
+    var el = this.tableNotifications()
+    this.shouldTableScroll = el.clientHeight - (el.scrollHeight - el.scrollTop) == 0
+  }
+
+  componentDidUpdate() {
+    if (this.shouldTableScroll)
+      this.scrollToBottom()
   }
 
   onStopClick() {
@@ -31,6 +42,15 @@ class MasterNode extends Component {
   onShutdownClick() {
     const { dispatch } = this.context.store
     dispatch( masterOn('shutdown') )
+  }
+
+  scrollToBottom() {
+    var el = this.tableNotifications()
+    el.scrollTop = el.scrollHeight
+  }
+
+  tableNotifications() {
+    return document.getElementById("tableNotifications")
   }
 
   render() {
@@ -58,13 +78,18 @@ class MasterNode extends Component {
 
     var data = ticketsNetToChart([])
 
+    // notification.nodeId - masterNodeId
     var notifications = []
-    for (var notification in ctx.notifications) {
+    ctx.master.notifications.forEach((notification) => {
       notifications.push(
-        <Row>
-          JSON.strigify(notification)
-        </Row>)
-    }
+        <tr>
+          <td>{1}</td>
+          <td>{notification.date}</td>
+          <td>{notification.code}</td>
+          <td>{JSON.stringify(notification.object)}</td>
+        </tr>
+      )
+    })
 
     return (
       <div className="MasterNode">
@@ -92,10 +117,22 @@ class MasterNode extends Component {
             </Col>
             <Col xs={6} md={4}>
               <Grid>
-                {notifications}
               </Grid>
             </Col>
           </Row>
+          <Table id="tableNotifications" className="NotificationTable" striped bordered condensed hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Code</th>
+                <th>Object</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notifications}
+            </tbody>
+          </Table>
         </Grid>
 
         {lightNodes}

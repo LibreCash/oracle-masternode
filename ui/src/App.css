@@ -89,3 +89,11 @@
 .ObjectProperty-value {
   display: table-cell;
 }
+
+
+.NotificationTable {
+  height: 300px;
+  overflow-y:auto;
+  width: 100%;
+  display:block;
+}
