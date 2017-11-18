@@ -4,6 +4,7 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import PriceChart from './PriceChart'
 import LightNode from './LightNode'
+import Notifications from './Notifications'
 
 import { ticketsNetToChart, renderObjectProps } from '../utils'
 
@@ -19,16 +20,6 @@ class MasterNode extends Component {
 
   }
 
-  componentWillUpdate() {
-    var el = this.tableNotifications()
-    this.shouldTableScroll = el.clientHeight - (el.scrollHeight - el.scrollTop) == 0
-  }
-
-  componentDidUpdate() {
-    if (this.shouldTableScroll)
-      this.scrollToBottom()
-  }
-
   onStopClick() {
     const { dispatch } = this.context.store
     dispatch( masterOn('off') )
@@ -42,15 +33,6 @@ class MasterNode extends Component {
   onShutdownClick() {
     const { dispatch } = this.context.store
     dispatch( masterOn('shutdown') )
-  }
-
-  scrollToBottom() {
-    var el = this.tableNotifications()
-    el.scrollTop = el.scrollHeight
-  }
-
-  tableNotifications() {
-    return document.getElementById("tableNotifications")
   }
 
   render() {
@@ -77,19 +59,6 @@ class MasterNode extends Component {
     }
 
     var data = ticketsNetToChart([])
-
-    // notification.nodeId - masterNodeId
-    var notifications = []
-    ctx.master.notifications.forEach((notification) => {
-      notifications.push(
-        <tr>
-          <td>{1}</td>
-          <td>{notification.date}</td>
-          <td>{notification.code}</td>
-          <td>{JSON.stringify(notification.object)}</td>
-        </tr>
-      )
-    })
 
     return (
       <div className="MasterNode">
@@ -120,20 +89,9 @@ class MasterNode extends Component {
               </Grid>
             </Col>
           </Row>
-          <Table id="tableNotifications" className="NotificationTable" striped bordered condensed hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Code</th>
-                <th>Object</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notifications}
-            </tbody>
-          </Table>
         </Grid>
+
+        <Notifications notifications={ctx.master.notifications} />
 
         {lightNodes}
 
