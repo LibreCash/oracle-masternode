@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
 
-import { Button } from 'react-bootstrap'
+import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import PriceChart from './PriceChart'
 
@@ -16,8 +16,19 @@ class LightNode extends Component {
 
   onStopClick() {
     const { dispatch } = this.context.store
-    dispatch( nodeOp({ code: 'onoff', on: false }) )
+    dispatch( nodeOp({ code: 'onoff', payload: 'off', id: this.props.node.id }) )
   }
+
+  onStartClick() {
+    const { dispatch } = this.context.store
+    dispatch( nodeOp({ code: 'onoff', payload: 'on', id: this.props.node.id }) )
+  }
+
+  onShutdownClick() {
+    const { dispatch } = this.context.store
+    dispatch( nodeOp({ code: 'onoff', payload: 'shutdown', id: this.props.node.id }) )
+  }
+
 
   render() {
     var node = this.props.node
@@ -43,14 +54,26 @@ class LightNode extends Component {
 
     return (
       <div className="LightNode">
-        
-        <div className="LightNode-label0">LightNode-{node.id}</div>
-        <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
-
-        {fields}
-        {fieldsOptions}
-
-        <Button bsStyle="danger" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
+        <Grid>
+          <Row>
+            <Col xs={6} md={6}>
+              <div className="LightNode-label0">LightNode {node.id}</div>
+              <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
+            </Col>
+            <Col xs={6} md={6}>
+              <Button className="LightNode-button-shutdown pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
+              {true ? 
+                  <Button className="LightNode-button-stop pull-right" bsStyle="warning" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
+                :
+                  <Button className="LightNode-button-start pull-right" bsStyle="success" disabled={!node.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
+              }
+            </Col>
+          </Row>
+          <Row>
+            {fields}
+            {fieldsOptions}
+          </Row>
+        </Grid>
 
         <PriceChart data={data} />
       </div>

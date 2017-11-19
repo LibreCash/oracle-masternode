@@ -9,13 +9,12 @@
 
 .App-header {
   background-color: #fcf8e3;
-  height: 150px;
-  padding: 20px;
   color: orange;
 }
 
 .App-title {
   font-size: 1.5em;
+  margin: 0;
 }
 
 .App-intro {
@@ -30,7 +29,7 @@
 
 
 .MasterNode {
-  border: 1px solid gray;
+  border: 0px solid gray;
 }
 
 .MasterNode-header {
@@ -39,7 +38,7 @@
 }
 
 .MasterNode-label0 {
-  font-size: 2.5em;
+  font-size: 2.0em;
   float: left;
 }
 
@@ -55,14 +54,15 @@
 
 
 .LightNode {
-  border: 1px solid gray;
-  margin: 10px;
+  border: 0px solid gray;
 }
 
 .LightNode-label0 {
-  font-size: 2.5em;
+  float: left;
+  font-size: 2.0em;
 }
 .LightNode-connected {
+  float: left;
   margin: 10px;
 }
 

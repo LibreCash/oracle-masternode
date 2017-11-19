@@ -64,11 +64,11 @@ class MasterNode extends Component {
       <div className="MasterNode">
         <Grid>
           <Row>
-            <Col xs={6} md={4}>
-              <div className="MasterNode-label0">Master-{ctx.master.id}</div>
+            <Col xs={6} md={6}>
+              <div className="MasterNode-label0">Master {ctx.master.state.id == -1 ? '?' : ctx.master.state.id}</div>
               <div className="MasterNode-connected"style={connected.style}>{connected.text}</div>
             </Col>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={6}>
               <Button className="MasterNode-button-shutdown pull-right" bsStyle="danger" disabled={!this.props.ctx.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
               {ctx.master.state.running ? 
                   <Button className="MasterNode-button-stop pull-right" bsStyle="warning" disabled={!this.props.ctx.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
@@ -78,20 +78,19 @@ class MasterNode extends Component {
             </Col>
           </Row>
           <Row>
-            <h4>Notifications</h4>
-          </Row>
-          <Row>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={6}>
               {fields}
             </Col>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={6}>
               <Grid>
               </Grid>
             </Col>
           </Row>
+          <Row>
+            <h4>Notifications</h4>
+            <Notifications notifications={ctx.master.notifications} />
+          </Row>
         </Grid>
-
-        <Notifications notifications={ctx.master.notifications} />
 
         {lightNodes}
 
