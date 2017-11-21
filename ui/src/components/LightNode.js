@@ -16,17 +16,17 @@ class LightNode extends Component {
 
   onStopClick() {
     const { dispatch } = this.context.store
-    dispatch( nodeOp({ code: 'onoff', payload: 'off', id: this.props.node.id }) )
+    dispatch( nodeOp({ code: 'onoff', cmd: 'off', id: this.props.node.id }) )
   }
 
   onStartClick() {
     const { dispatch } = this.context.store
-    dispatch( nodeOp({ code: 'onoff', payload: 'on', id: this.props.node.id }) )
+    dispatch( nodeOp({ code: 'onoff', cmd: 'on', id: this.props.node.id }) )
   }
 
   onShutdownClick() {
     const { dispatch } = this.context.store
-    dispatch( nodeOp({ code: 'onoff', payload: 'shutdown', id: this.props.node.id }) )
+    dispatch( nodeOp({ code: 'onoff', cmd: 'shutdown', id: this.props.node.id }) )
   }
 
 
