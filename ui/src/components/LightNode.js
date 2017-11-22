@@ -60,13 +60,16 @@ class LightNode extends Component {
               <div className="LightNode-label0">LightNode {node.id}</div>
               <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
             </Col>
-            <Col xs={6} md={6}>
+            <Col xs={6} md={4}>
               <Button className="LightNode-button-shutdown pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
               {true ? 
                   <Button className="LightNode-button-stop pull-right" bsStyle="warning" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
                 :
                   <Button className="LightNode-button-start pull-right" bsStyle="success" disabled={!node.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
               }
+            </Col>
+            <Col xs={6} md={2}>
+              <Button className="pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onSimulateClick.bind(this)}>Shutdown</Button>
             </Col>
           </Row>
           <Row>

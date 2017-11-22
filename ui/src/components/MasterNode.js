@@ -5,6 +5,7 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 import PriceChart from './PriceChart'
 import LightNode from './LightNode'
 import Notifications from './Notifications'
+import NodesView from './NodesView'
 
 import { ticketsNetToChart, renderObjectProps } from '../utils'
 
@@ -78,6 +79,10 @@ class MasterNode extends Component {
             </Col>
           </Row>
           <Row>
+            <NodesView master={ctx.master}>
+            </NodesView>
+          </Row>
+          <Row>
             <Col xs={6} md={6}>
               {fields}
             </Col>
@@ -87,7 +92,7 @@ class MasterNode extends Component {
             </Col>
           </Row>
           <Row>
-            <h4>Notifications</h4>
+            <h3>Notifications</h3>
             <Notifications notifications={ctx.master.notifications} />
           </Row>
         </Grid>

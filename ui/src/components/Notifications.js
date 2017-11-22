@@ -37,7 +37,6 @@ class Notifications extends Component {
       )
     })
 
-
     return (
       <Table id="tableNotifications" className="NotificationTable" striped bordered condensed hover>
         <thead>
