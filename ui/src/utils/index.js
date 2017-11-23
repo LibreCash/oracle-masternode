@@ -2,18 +2,23 @@ import React from 'react'
 
 import { Table } from 'react-bootstrap'
 
-export function ticketsNetToChart(tickets) {
+export function tickersNetToChart(tickers) {
     var data = []
-    tickets.forEach((ticket) => {
+    try {
+		console.log(tickers)
+    tickers.forEach((ticker) => {
       data.push({
-        date: new Date(ticket.timestamp),
-        open: ticket.low,
-        high: ticket.high,
-        low: ticket.low,
-        close: ticket.high,
-        volume: ticket.volume
+        date: new Date(ticker.timestamp),
+        open: ticker.low,
+        high: ticker.high,
+        low: ticker.low,
+        close: ticker.high,
+        volume: ticker.volume
       })
     })
+	} catch (e) {
+		console.log(e)
+	}
     return data
 }
 

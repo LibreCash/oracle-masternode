@@ -31,7 +31,7 @@ function createSocketChannel(socket) {
 	      	type: MASTER_CONNECTED, 
 	      	payload: event.payload 
 	      })
-	      console.log(event)
+//	      console.log(event)
 	    }
 
 	    socket.on('disconnect', (e) => {

@@ -7,7 +7,7 @@ import LightNode from './LightNode'
 import Notifications from './Notifications'
 import NodesView from './NodesView'
 
-import { ticketsNetToChart, renderObjectProps } from '../utils'
+import { tickersNetToChart, renderObjectProps } from '../utils'
 
 import { masterOn } from '../actions'
 
@@ -59,7 +59,7 @@ class MasterNode extends Component {
       }
     }
 
-    var data = ticketsNetToChart([])
+    var data = tickersNetToChart([])
 
     return (
       <div className="MasterNode">

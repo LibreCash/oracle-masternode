@@ -33,7 +33,7 @@ const INITIAL_STATE = {
 }
 
 const startupReducer = (state = INITIAL_STATE, action) => {
-	console.log('REDUCER0', action, state)
+//	console.log('REDUCER0', action, state)
 	switch (action.type) {
 		case STARTUP:
 			return {

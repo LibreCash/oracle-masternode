@@ -5,7 +5,7 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import PriceChart from './PriceChart'
 
-import { ticketsNetToChart, renderObjectProps } from '../utils'
+import { tickersNetToChart, renderObjectProps } from '../utils'
 
 import { nodeOp } from '../actions'
 
@@ -29,6 +29,10 @@ class LightNode extends Component {
     dispatch( nodeOp({ code: 'onoff', cmd: 'shutdown', id: this.props.node.id }) )
   }
 
+  onApplyCommand() {
+    const { dispatch } = this.context.store
+    dispatch( nodeOp({ code: 'simulate', cmd: 'testRandomPrice', id: this.props.node.id }) )
+  }
 
   render() {
     var node = this.props.node
@@ -45,12 +49,12 @@ class LightNode extends Component {
       text: 'Offline'
     }
 
-    var fields = renderObjectProps(node, ['connected', 'options', 'tickets'])
+    var fields = renderObjectProps(node, ['connected', 'options', 'tickers'])
     var fieldsOptions = renderObjectProps(node.options)
 
     // graph tickets
 
-    var data = ticketsNetToChart(node.tickets)
+    var data = tickersNetToChart(node.tickers)
 
     return (
       <div className="LightNode">
@@ -60,6 +64,9 @@ class LightNode extends Component {
               <div className="LightNode-label0">LightNode {node.id}</div>
               <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
             </Col>
+            <Col xs={6} md={2}>
+              <Button className="pull-left" bsStyle="success" disabled={!node.connected} onClick={this.onApplyCommand.bind(this)}>Apply</Button>
+            </Col>
             <Col xs={6} md={4}>
               <Button className="LightNode-button-shutdown pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
               {true ? 
@@ -67,9 +74,6 @@ class LightNode extends Component {
                 :
                   <Button className="LightNode-button-start pull-right" bsStyle="success" disabled={!node.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
               }
-            </Col>
-            <Col xs={6} md={2}>
-              <Button className="pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onSimulateClick.bind(this)}>Shutdown</Button>
             </Col>
           </Row>
           <Row>
