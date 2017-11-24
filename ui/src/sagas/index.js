@@ -84,7 +84,7 @@ function* pong(socket) {
 export function* externalListener(socketChannel) {
   while (true) {
     const event = yield take(socketChannel)
-    yield apply(console, console.log, ['EVENT::::', event])
+//    yield apply(console, console.log, ['EVENT::::', event])
     yield put(event);
   }
 }

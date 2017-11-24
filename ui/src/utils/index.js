@@ -5,17 +5,16 @@ import { Table } from 'react-bootstrap'
 export function tickersNetToChart(tickers) {
     var data = []
     try {
-		console.log(tickers)
-    tickers.forEach((ticker) => {
-      data.push({
-        date: new Date(ticker.timestamp),
-        open: ticker.low,
-        high: ticker.high,
-        low: ticker.low,
-        close: ticker.high,
-        volume: ticker.volume
-      })
-    })
+        tickers.forEach((ticker) => {
+          data.push({
+            date: new Date(ticker.timestamp),
+            open: ticker.low,
+            high: ticker.high,
+            low: ticker.low,
+            close: ticker.high,
+            volume: ticker.volume
+          })
+        })
 	} catch (e) {
 		console.log(e)
 	}
@@ -25,7 +24,6 @@ export function tickersNetToChart(tickers) {
 export function renderObjectProps(object, exclude = []) {
     var fields = []
     for (let [k, field] of Object.entries(object)) {
-      console.log(field)
       if (exclude.indexOf(k) == -1)
         fields.push(
         	<tr>

@@ -13,6 +13,8 @@ import {
   NOTIFICATION
 } from '../actions'
 
+// todo: remove ctx, refactor state.ctx -> state
+
 const INITIAL_STATE = {
 	ctx: { 
 		connected: false,
@@ -28,7 +30,9 @@ const INITIAL_STATE = {
 			notifications: []
 		},
 
-		lightNodes: []
+		lightNodes: [],
+		lightNodesNotifications: {}
+
 	}
 }
 
@@ -70,14 +74,33 @@ const startupReducer = (state = INITIAL_STATE, action) => {
 				}
 			}
 		case NODES_LIST:
+			// map notifications
+			var lightNodesNotifications = {}
+			for (var i in action.payload) {
+				var node = action.payload[i]
+				lightNodesNotifications[node.id] = lightNodesNotifications[node.id] || []
+			}
 			return {
 				...state,
 				ctx: {
 					...state.ctx,
-					lightNodes: action.payload
+					lightNodes: action.payload,
+					lightNodesNotifications
 				}
 			}
 		case NOTIFICATION:
+			// map notifications
+			var lightNodesNotifications = state.ctx.lightNodesNotifications
+			if (action.payload.code == 'LIGHTNODE_NOTIFICATION') {
+				var id = action.payload.nodeId
+				lightNodesNotifications = {
+					...lightNodesNotifications,
+					[id]: [
+						...(lightNodesNotifications[id] ? lightNodesNotifications[id] : []),
+						action.payload
+					]
+				}
+			}
 			return {
 				...state,
 				ctx: {
@@ -88,7 +111,8 @@ const startupReducer = (state = INITIAL_STATE, action) => {
 							...state.ctx.master.notifications,
 							action.payload
 						]
-					}
+					},
+					lightNodesNotifications
 				}
 			}
 		default:
