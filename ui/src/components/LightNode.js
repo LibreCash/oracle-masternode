@@ -56,6 +56,8 @@ class LightNode extends Component {
 
     var data = tickersNetToChart(node.tickers)
 
+    var notifications = Notifications()
+
     return (
       <div className="LightNode">
         <Grid>
@@ -83,6 +85,8 @@ class LightNode extends Component {
         </Grid>
 
         <PriceChart data={data} />
+
+        {notifications}
       </div>
     )
   }
