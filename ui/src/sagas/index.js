@@ -18,13 +18,17 @@ import {
 
 } from '../actions'
 
+// todo: configure in config file
+var JWT_TOKEN = 'masternode0-test-secret'
+
 function createWebSocketConnection() {
-	const socket = openSocket('http://localhost:27999');
+	const socket = openSocket('http://localhost:27999', );
 	return socket
 }
 
 function createSocketChannel(socket) {
 	return eventChannel(emit => {
+		var authenticated = false
 
 		const pingHandler = (event) => {
 	      event && emit({ 
@@ -35,6 +39,7 @@ function createSocketChannel(socket) {
 	    }
 
 	    socket.on('disconnect', (e) => {
+	      authenticated = false
 	      emit({ 
 	      	type: MASTER_DISCONNECTED, 
 	      	payload: null
@@ -44,6 +49,10 @@ function createSocketChannel(socket) {
 		socket.on('ping', pingHandler)
 
 		socket.on('message', (e) => {
+			if (!authenticated) {
+				console.log('Not authenticated')
+				//return
+			}
 			var type
 			var payload
 			switch(e.event) {
@@ -55,7 +64,6 @@ function createSocketChannel(socket) {
 					type = NODES_LIST
 					payload = e.nodes
 					break
-//				case 'event':
 				case 'notification':
 					type = NOTIFICATION
 					payload = e.notification
@@ -68,6 +76,16 @@ function createSocketChannel(socket) {
 	      	payload: payload
 	      })
 		})
+
+        socket.on('authenticated', function () {
+          authenticated = true
+        })
+
+		socket.on('error', (e) => {
+          console.log('Error socket.io: ', e)
+		})
+
+		socket.emit('authenticate', {token: JWT_TOKEN})
 
 		const unsubscribe = () => {
 	      socket.off('ping', pingHandler)

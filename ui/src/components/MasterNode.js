@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
-import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
+import { Button, Label, Grid, Row, Col, Table, Tabs, Tab } from 'react-bootstrap'
 
 import PriceChart from './PriceChart'
 import LightNode from './LightNode'
@@ -63,6 +63,8 @@ class MasterNode extends Component {
 
     return (
       <div className="MasterNode">
+        <Tabs defaultActiveKey={1} id="MasterNode-tabs">
+        <Tab eventKey={1} title="Main">
         <Grid>
           <Row>
             <Col xs={6} md={6}>
@@ -77,10 +79,6 @@ class MasterNode extends Component {
                   <Button className="MasterNode-button-start pull-right" bsStyle="success" disabled={!this.props.ctx.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
               }
             </Col>
-          </Row>
-          <Row>
-            <NodesView master={ctx.master}>
-            </NodesView>
           </Row>
           <Row>
             <Col xs={6} md={6}>
@@ -100,6 +98,12 @@ class MasterNode extends Component {
         {lightNodes}
 
         <PriceChart data={data} />
+        </Tab>
+        <Tab eventKey={2} title="Nodes">
+            <NodesView master={ctx.master}>
+            </NodesView>
+        </Tab>
+        </Tabs>
       </div>
     )
   }

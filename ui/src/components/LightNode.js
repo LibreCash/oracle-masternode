@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 
 import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
+import Notifications from './Notifications'
 import PriceChart from './PriceChart'
 
 import { tickersNetToChart, renderObjectProps } from '../utils'
