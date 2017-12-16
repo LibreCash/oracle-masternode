@@ -22,6 +22,9 @@ export function tickersNetToChart(tickers) {
 }
 
 export function renderObjectProps(object, exclude = []) {
+	if (!object)
+		return <div>renderObjectProps: object is null</div>
+
     var fields = []
     for (let [k, field] of Object.entries(object)) {
       if (exclude.indexOf(k) == -1)

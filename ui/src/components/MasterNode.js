@@ -50,6 +50,9 @@ class MasterNode extends Component {
       text: 'Offline'
     }
 
+    if (!ctx.master.state)
+      return <div>ctx.master.state is null</div>
+
     var fields = renderObjectProps(ctx.master.state)
 
     if (ctx.connected) {
