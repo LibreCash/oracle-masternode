@@ -3,7 +3,8 @@
 import { take, all, put, call, apply, fork, race, cancelled, takeEvery, takeLatest } from 'redux-saga/effects'
 import { eventChannel, END, delay } from 'redux-saga'
 //const io = require('socket.io')();
-import openSocket from 'socket.io-client';
+import openSocket from 'socket.io-client'
+import jwt from 'jsonwebtoken'
 
 import { 
   STARTUP,
@@ -18,8 +19,9 @@ import {
 
 } from '../actions'
 
-// todo: configure in config file
-var JWT_TOKEN = 'masternode0-test-secret'
+import config from '../config/config'
+
+var JWT_TOKEN = jwt.sign(config.jwt.profile, config.jwt.secret, {})
 
 function createWebSocketConnection() {
 	const socket = openSocket('http://localhost:27999', );
@@ -37,6 +39,9 @@ function createSocketChannel(socket) {
 	      })
 //	      console.log(event)
 	    }
+	    socket.on('connect', (e) => {
+			socket.emit('authenticate', {token: JWT_TOKEN})
+	    })
 
 	    socket.on('disconnect', (e) => {
 	      authenticated = false
@@ -85,7 +90,7 @@ function createSocketChannel(socket) {
           console.log('Error socket.io: ', e)
 		})
 
-		socket.emit('authenticate', {token: JWT_TOKEN})
+//		socket.emit('authenticate', {token: JWT_TOKEN})
 
 		const unsubscribe = () => {
 	      socket.off('ping', pingHandler)
