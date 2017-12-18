@@ -92,13 +92,21 @@ const startupReducer = (state = INITIAL_STATE, action) => {
 			// map notifications
 			var lightNodesNotifications = state.ctx.lightNodesNotifications
 			if (action.payload.code == 'LIGHTNODE_NOTIFICATION') {
-				var id = action.payload.nodeId
+				var notification = action.payload.object[0]
+				var id = notification.masterNodeId
 				lightNodesNotifications = {
 					...lightNodesNotifications,
 					[id]: [
 						...(lightNodesNotifications[id] ? lightNodesNotifications[id] : []),
-						action.payload
+						notification
 					]
+				}
+				return {
+					...state,
+					ctx: {
+						...state.ctx,
+						lightNodesNotifications
+					}
 				}
 			}
 			return {

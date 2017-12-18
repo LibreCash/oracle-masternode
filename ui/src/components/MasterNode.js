@@ -58,7 +58,8 @@ class MasterNode extends Component {
     if (ctx.connected) {
       var lightNodes = []
       for (let node of ctx.lightNodes) {
-        lightNodes.push(<LightNode node={node}></LightNode>)
+        var notifications = ctx.lightNodesNotifications[node.id]
+        lightNodes.push(<LightNode node={node} notifications={notifications}></LightNode>)
       }
     }
 

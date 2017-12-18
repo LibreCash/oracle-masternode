@@ -97,3 +97,7 @@
   width: 100%;
   display:block;
 }
+
+.react-stockchart {
+  position: relative !important; /* Chart svg bugfix */
+}

@@ -2,7 +2,7 @@
 
 import { take, all, put, call, apply, fork, race, cancelled, takeEvery, takeLatest } from 'redux-saga/effects'
 import { eventChannel, END, delay } from 'redux-saga'
-//const io = require('socket.io')();
+
 import openSocket from 'socket.io-client'
 import jwt from 'jsonwebtoken'
 
@@ -24,7 +24,7 @@ import config from '../config/config'
 var JWT_TOKEN = jwt.sign(config.jwt.profile, config.jwt.secret, {})
 
 function createWebSocketConnection() {
-	const socket = openSocket('http://localhost:27999', );
+	const socket = openSocket(config.ws);
 	return socket
 }
 
@@ -56,7 +56,7 @@ function createSocketChannel(socket) {
 		socket.on('message', (e) => {
 			if (!authenticated) {
 				console.log('Not authenticated')
-				//return
+				return
 			}
 			var type
 			var payload

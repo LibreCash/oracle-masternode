@@ -1,4 +1,5 @@
 const config = {
+	ws: 'http://localhost:27999',
 	jwt: {
 		profile: {
             first_name: 'John',

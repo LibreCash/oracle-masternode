@@ -50,14 +50,15 @@ class LightNode extends Component {
       text: 'Offline'
     }
 
-    var fields = renderObjectProps(node, ['connected', 'options', 'tickers'])
+    var fields = renderObjectProps(node, ['connected', 'options', 'tickers', 'state'])
+    var fieldsState = renderObjectProps(node.state)
     var fieldsOptions = renderObjectProps(node.options)
 
     // graph tickets
 
     var data = tickersNetToChart(node.tickers)
 
-    var notifications = Notifications()
+    var notifications = this.props.notifications
 
     return (
       <div className="LightNode">
@@ -67,10 +68,10 @@ class LightNode extends Component {
               <div className="LightNode-label0">LightNode {node.id}</div>
               <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
             </Col>
-            <Col xs={6} md={2}>
+            <Col xs={2} md={2}>
               <Button className="pull-left" bsStyle="success" disabled={!node.connected} onClick={this.onApplyCommand.bind(this)}>Apply</Button>
             </Col>
-            <Col xs={6} md={4}>
+            <Col xs={4} md={4}>
               <Button className="LightNode-button-shutdown pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
               {true ? 
                   <Button className="LightNode-button-stop pull-right" bsStyle="warning" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
@@ -81,13 +82,15 @@ class LightNode extends Component {
           </Row>
           <Row>
             {fields}
+            {fieldsState}
             {fieldsOptions}
           </Row>
         </Grid>
 
         <PriceChart data={data} />
 
-        {notifications}
+        <h3>Notifications</h3>
+        <Notifications notifications={notifications} />
       </div>
     )
   }
