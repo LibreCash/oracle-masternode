@@ -85,12 +85,14 @@ class LightNode extends Component {
             {fieldsState}
             {fieldsOptions}
           </Row>
+          <Row>
+            <PriceChart data={data} />
+          </Row>
+          <Row>
+            <h3>Notifications</h3>
+            <Notifications notifications={notifications} />
+          </Row>
         </Grid>
-
-        <PriceChart data={data} />
-
-        <h3>Notifications</h3>
-        <Notifications notifications={notifications} />
       </div>
     )
   }
