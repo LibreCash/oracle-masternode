@@ -11,6 +11,8 @@ class NodesView extends Component {
     dispatch( addNode({
       name: this.refNewNodeName,
       url: this.refNewNodeUrl,
+      login: this.refNewNodeLogin,
+      password: this.refNewNodePassword,
     }))
   }
 
@@ -58,6 +60,14 @@ class NodesView extends Component {
               <FormGroup>
                 <ControlLabel>Url:</ControlLabel>
                 <FormControl inputRef={ref => {this.refNewNodeUrl = ref; }} />
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Login:</ControlLabel>
+                <FormControl inputRef={ref => {this.refNewNodeLogin = ref; }} />
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Password:</ControlLabel>
+                <FormControl inputRef={ref => {this.refNewNodePassword = ref; }} />
               </FormGroup>
               <Button className="NewNode-button-shutdown pull-right" onClick={this.onAddNode.bind(this)}>Add</Button>
             </Form>
