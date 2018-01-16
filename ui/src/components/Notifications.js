@@ -55,4 +55,4 @@ class Notifications extends Component {
   }
 }
 
-export default Notifications;
+export default Notifications

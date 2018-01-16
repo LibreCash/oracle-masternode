@@ -6,6 +6,8 @@ import PriceChart from './PriceChart'
 import LightNode from './LightNode'
 import Notifications from './Notifications'
 import NodesView from './NodesView'
+import ActionsHistory from './ActionsHistory'
+
 
 import { tickersNetToChart, renderObjectProps } from '../utils'
 
@@ -72,6 +74,11 @@ class MasterNode extends Component {
 
     var data = tickersNetToChart([])
 
+    var actions = [
+      {id: 1, name: 'Login Success', ip: '127.0.0.1', user: 'default', date: new Date()},
+      {id: 2, name: 'Login Fail', ip: '127.0.0.1', user: 'hack@r', date: new Date()}
+    ]
+
     return (
       <div className="MasterNode">
         <Tabs defaultActiveKey={1} id="MasterNode-tabs" onClick={this.onTabClick.bind(this)}>
@@ -106,6 +113,10 @@ class MasterNode extends Component {
               </Row>
               <Row>
                 <PriceChart data={data} />
+              </Row>
+              <Row>
+                <h3>Audit Actions</h3>
+                <ActionsHistory actions={actions} />
               </Row>
             </Grid>
 

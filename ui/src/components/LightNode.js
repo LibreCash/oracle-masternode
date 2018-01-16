@@ -5,6 +5,8 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import Notifications from './Notifications'
 import PriceChart from './PriceChart'
+import PricesView from './PricesView'
+import ActionsHistory from './ActionsHistory'
 
 import { tickersNetToChart, renderObjectProps } from '../utils'
 
@@ -60,6 +62,14 @@ class LightNode extends Component {
 
     var notifications = this.props.notifications
 
+    var actions = [
+      {id: 1, name: 'Login Success', ip: '127.0.0.1', user: 'default', date: new Date()},
+      {id: 2, name: 'Login Fail', ip: '127.0.0.1', user: 'hack@r', date: new Date()}
+    ]
+
+    var lastPrices = [
+    ]
+
     return (
       <div className="LightNode">
         <Grid>
@@ -81,16 +91,27 @@ class LightNode extends Component {
             </Col>
           </Row>
           <Row>
-            {fields}
-            {fieldsState}
+            <h3>Options</h3>
             {fieldsOptions}
+            <h3>State</h3>
+            {fieldsState}
+            <h3>Master State</h3>
+            {fields}
           </Row>
           <Row>
             <PriceChart data={data} width={500} />
           </Row>
           <Row>
+            <h3>Last Prices</h3>
+            <PricesView prices={lastPrices} />
+          </Row>
+          <Row>
             <h3>Notifications</h3>
             <Notifications notifications={notifications} />
+          </Row>
+          <Row>
+            <h3>Audit Actions</h3>
+            <ActionsHistory actions={actions} />
           </Row>
         </Grid>
       </div>
