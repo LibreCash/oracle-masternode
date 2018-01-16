@@ -7,6 +7,8 @@ import Notifications from './Notifications'
 import PriceChart from './PriceChart'
 import PricesView from './PricesView'
 import ActionsHistory from './ActionsHistory'
+import EthView from './EthView'
+import ExchangesView from './ExchangesView'
 
 import { tickersNetToChart, renderObjectProps } from '../utils'
 
@@ -53,7 +55,7 @@ class LightNode extends Component {
     }
 
     var fields = renderObjectProps(node, ['connected', 'options', 'tickers', 'state'])
-    var fieldsState = renderObjectProps(node.state)
+    var fieldsState = renderObjectProps(node.state, ['eth'])
     var fieldsOptions = renderObjectProps(node.options)
 
     // graph tickets
@@ -91,15 +93,19 @@ class LightNode extends Component {
             </Col>
           </Row>
           <Row>
+            <h3>Ethereum</h3>
+            <EthView eth={node.state.eth} />
+          </Row>
+          <Row>
+            <h3>Exchanges</h3>
+          </Row>
+          <Row>
             <h3>Options</h3>
             {fieldsOptions}
             <h3>State</h3>
             {fieldsState}
             <h3>Master State</h3>
             {fields}
-          </Row>
-          <Row>
-            <PriceChart data={data} width={500} />
           </Row>
           <Row>
             <h3>Last Prices</h3>
@@ -124,3 +130,8 @@ LightNode.contextTypes = {
 }
 
 export default LightNode
+/*
+          <Row>
+            <PriceChart data={data} width={500} />
+          </Row>
+*/

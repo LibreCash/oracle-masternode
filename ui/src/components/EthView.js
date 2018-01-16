@@ -24,7 +24,7 @@ class EthViewErrors extends Component {
       errors.push(
         <tr>
           <td>{error[0]}</td>
-          <td>{JSON.stringify(error.length > 1 ? error[1] : null)}</td>
+          <td>{JSON.stringify(error.length > 1 ? error.slice(1) : null)}</td>
         </tr>
       )
     })
@@ -53,8 +53,9 @@ class EthViewClients extends Component {
       clients.push(
         <tr>
           <td>{client.name}</td>
-          <td>{client.connected}</td>
-          <td>{client.active}</td>
+          <td>{client.url}</td>
+          <td>{JSON.stringify(client.connected)}</td>
+          <td>{JSON.stringify(client.active)}</td>
           <td>{client.lastPrice}</td>
           <td>{client.lastUpdate}</td>
         </tr>
@@ -66,6 +67,7 @@ class EthViewClients extends Component {
         <thead>
           <tr>
             <th>Name</th>
+            <th>Url</th>
             <th>Connected</th>
             <th>Active</th>
             <th>LastPrice</th>
@@ -83,15 +85,18 @@ class EthViewClients extends Component {
 class EthView extends Component {
 	
   render() {
+    var eth = this.props.eth;
 
     return (
       <div className="EthView">
         <Grid>
           <Row>
-            <h3>Ethereum Errors</h3>
+            <h5>Ethereum Errors</h5>
+            <EthViewErrors errors={eth ? eth.errors : []} />
           </Row>
           <Row>
-            <h3>Ethereum Clients</h3>
+            <h5>Ethereum Clients</h5>
+            <EthViewClients clients={eth ? eth.clients : []} />
           </Row>
         </Grid>
       </div>)
