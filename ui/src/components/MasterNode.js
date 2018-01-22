@@ -60,7 +60,7 @@ class MasterNode extends Component {
     if (!ctx.master.state)
       return <div>ctx.master.state is null</div>
 
-    var fields = renderObjectProps(ctx.master.state, 'lastPrices')
+    var fields = renderObjectProps(ctx.master.state, ['lastPrices', 'actions'])
 
     var lightNodes = []
 
@@ -75,10 +75,7 @@ class MasterNode extends Component {
 
     var data = tickersNetToChart([])
 
-    var actions = [
-      {id: 1, name: 'Login Success', ip: '127.0.0.1', user: 'default', date: new Date()},
-      {id: 2, name: 'Login Fail', ip: '127.0.0.1', user: 'hack@r', date: new Date()}
-    ]
+    var actions = ctx.master.state.actions || []
 
     var lastPrices = ctx.master.state.lastPrices || []
 

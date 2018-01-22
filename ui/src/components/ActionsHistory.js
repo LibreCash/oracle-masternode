@@ -16,11 +16,10 @@ class ActionsHistory extends Component {
   	this.props.actions.forEach((action) => {
       actions.push(
         <tr>
-          <td>{action.id}</td>
           <td>{action.name}</td>
           <td>{action.ip}</td>
           <td>{action.user}</td>
-          <td>{action.date.toISOString()}</td>
+          <td>{action.date}</td>
         </tr>
       )
     })
@@ -28,7 +27,6 @@ class ActionsHistory extends Component {
       <Table id="tableActions" className="ActionTable" striped bordered condensed hover>
         <thead>
           <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>IP</th>
             <th>User</th>
@@ -44,3 +42,5 @@ class ActionsHistory extends Component {
 }
 
 export default ActionsHistory
+//            <th>Id</th>
+//          <td>{action.id}</td>

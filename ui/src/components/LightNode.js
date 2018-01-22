@@ -55,19 +55,16 @@ class LightNode extends Component {
     }
 
     var fields = renderObjectProps(node, ['connected', 'options', 'tickers', 'state'])
-    var fieldsState = renderObjectProps(node.state, ['eth', 'exchanges'])
+    var fieldsState = renderObjectProps(node.state, ['eth', 'exchanges', 'actions'])
     var fieldsOptions = renderObjectProps(node.options)
 
     // graph tickets
 
     var data = tickersNetToChart(node.tickers)
 
-    var notifications = this.props.notifications
+    var notifications = this.props.notifications || []
 
-    var actions = [
-      {id: 1, name: 'Login Success', ip: '127.0.0.1', user: 'default', date: new Date()},
-      {id: 2, name: 'Login Fail', ip: '127.0.0.1', user: 'hack@r', date: new Date()}
-    ]
+    var actions = node.state.actions || []
 
     var exchanges = node.state.exchanges || []
 
