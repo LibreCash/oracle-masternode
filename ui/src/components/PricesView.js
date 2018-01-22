@@ -12,11 +12,11 @@ class PricesView extends Component {
   render() {
   	var prices = []
   	this.props.prices.forEach((price) => {
-      price.push(
+      prices.push(
         <tr>
-          <td>{price.date.toISOString()}</td>
+          <td>{price.date}</td>
           <td>{price.price}</td>
-          <td>{price.deltaPercent}</td>
+          <td>{price.deltaPercent} %</td>
         </tr>
       )
     })

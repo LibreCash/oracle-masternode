@@ -5,40 +5,59 @@ import PropTypes from "prop-types"
 
 import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
+import { renderObjectProps } from '../utils'
+
+// ETHEREUM
 // CLIENTS
-//  - errors
 //  - client 
 //      infura
 //      web3
-// ERROR
+// STATUS
+//  props
+// EVENT
+//  eth
+//  details (expandable)
 // CLIENT
 //  Connected
 //  Active
 //  LastPrice
 //  LastUpdate
 
-class EthViewErrors extends Component {
+class EthStatus extends Component {
   render() {
-    var errors = []
-    this.props.errors.forEach((error) => {
-      errors.push(
+    var status = this.props.status;
+    var fields = renderObjectProps(status);
+
+    return (
+      <div>
+        {fields}
+      </div>
+    )
+  }
+}
+
+class EthViewEvents extends Component {
+  render() {
+    var events = []
+    this.props.events.forEach((event) => {
+      events.push(
         <tr>
-          <td>{error[0]}</td>
-          <td>{JSON.stringify(error.length > 1 ? error.slice(1) : null)}</td>
+          <td>{event[0]}</td>
+          <td>{JSON.stringify(event.length > 1 ? event.slice(1) : null)}</td>
         </tr>
       )
     })
 
     return (
-      <Table id="tableEthViewErrors" className="EthViewErrorsTable" striped bordered condensed hover>
+      <Table id="tableEthViewEvents" className="EthViewEventsTable" striped bordered condensed hover>
         <thead>
           <tr>
-            <th>Code</th>
+            <th>Eth</th>
             <th>Details</th>
           </tr>
         </thead>
         <tbody>
-          {errors}
+          {events}
         </tbody>
       </Table>
     )
@@ -91,8 +110,12 @@ class EthView extends Component {
       <div className="EthView">
         <Grid>
           <Row>
-            <h5>Ethereum Errors</h5>
-            <EthViewErrors errors={eth ? eth.errors : []} />
+            <h5>Ethereum Status</h5>
+            <EthStatus status={(eth && eth.status) || []} />
+          </Row>
+          <Row>
+            <h5>Ethereum Events</h5>
+            <EthViewEvents events={eth ? eth.events : []} />
           </Row>
           <Row>
             <h5>Ethereum Clients</h5>

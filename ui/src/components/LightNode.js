@@ -5,10 +5,10 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import Notifications from './Notifications'
 import PriceChart from './PriceChart'
-import PricesView from './PricesView'
 import ActionsHistory from './ActionsHistory'
 import EthView from './EthView'
 import ExchangesView from './ExchangesView'
+import PricesView from './PricesView'
 
 import { tickersNetToChart, renderObjectProps } from '../utils'
 
@@ -55,7 +55,7 @@ class LightNode extends Component {
     }
 
     var fields = renderObjectProps(node, ['connected', 'options', 'tickers', 'state'])
-    var fieldsState = renderObjectProps(node.state, ['eth'])
+    var fieldsState = renderObjectProps(node.state, ['eth', 'exchanges'])
     var fieldsOptions = renderObjectProps(node.options)
 
     // graph tickets
@@ -69,8 +69,7 @@ class LightNode extends Component {
       {id: 2, name: 'Login Fail', ip: '127.0.0.1', user: 'hack@r', date: new Date()}
     ]
 
-    var lastPrices = [
-    ]
+    var exchanges = node.state.exchanges || []
 
     return (
       <div className="LightNode">
@@ -98,6 +97,7 @@ class LightNode extends Component {
           </Row>
           <Row>
             <h3>Exchanges</h3>
+            <ExchangesView exchanges={exchanges} />
           </Row>
           <Row>
             <h3>Options</h3>
@@ -106,10 +106,6 @@ class LightNode extends Component {
             {fieldsState}
             <h3>Master State</h3>
             {fields}
-          </Row>
-          <Row>
-            <h3>Last Prices</h3>
-            <PricesView prices={lastPrices} />
           </Row>
           <Row>
             <h3>Notifications</h3>

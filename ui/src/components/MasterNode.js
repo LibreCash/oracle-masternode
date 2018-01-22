@@ -7,6 +7,7 @@ import LightNode from './LightNode'
 import Notifications from './Notifications'
 import NodesView from './NodesView'
 import ActionsHistory from './ActionsHistory'
+import PricesView from './PricesView'
 
 
 import { tickersNetToChart, renderObjectProps } from '../utils'
@@ -59,7 +60,7 @@ class MasterNode extends Component {
     if (!ctx.master.state)
       return <div>ctx.master.state is null</div>
 
-    var fields = renderObjectProps(ctx.master.state)
+    var fields = renderObjectProps(ctx.master.state, 'lastPrices')
 
     var lightNodes = []
 
@@ -78,6 +79,8 @@ class MasterNode extends Component {
       {id: 1, name: 'Login Success', ip: '127.0.0.1', user: 'default', date: new Date()},
       {id: 2, name: 'Login Fail', ip: '127.0.0.1', user: 'hack@r', date: new Date()}
     ]
+
+    var lastPrices = ctx.master.state.lastPrices || []
 
     return (
       <div className="MasterNode">
@@ -106,6 +109,10 @@ class MasterNode extends Component {
                   <Grid>
                   </Grid>
                 </Col>
+              </Row>
+              <Row>
+                <h3>Last Prices</h3>
+                <PricesView prices={lastPrices} />
               </Row>
               <Row>
                 <h3>Notifications</h3>

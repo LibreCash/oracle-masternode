@@ -17,16 +17,20 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 class ExchangesView extends Component {
 
+	handleExchangeToggle (exchange) {
+		console.log(exchange)
+	}
+
   render() {
   	var exchanges = []
   	this.props.exchanges.forEach((exchange) => {
-      exchange.push(
+      exchanges.push(
         <tr>
           <td>{exchange.name}</td>
           <td>{exchange.symbol}</td>
-          <td>{exchange.rate}</td>
+          <td>{exchange.lastest}</td>
           <td>
-						<Button className="NewNode-button-shutdown pull-right" bsStyle={exchange.on ? "danger" : "success"} onClick={this.handleExchangeToggle.bind(this, exchange)}>{exchange.on ? "Off" : "On"}</Button>
+						<Button className="NewNode-button-shutdown pull-right" bsStyle={exchange.enabled ? "danger" : "success"} onClick={this.handleExchangeToggle.bind(this, exchange)}>{exchange.enabled ? "Off" : "On"}</Button>
 		      </td>
         </tr>
       )
