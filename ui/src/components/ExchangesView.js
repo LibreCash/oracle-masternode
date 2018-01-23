@@ -17,10 +17,6 @@ import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 class ExchangesView extends Component {
 
-	handleExchangeToggle (exchange) {
-		console.log(exchange)
-	}
-
   render() {
   	var exchanges = []
   	this.props.exchanges.forEach((exchange) => {
@@ -30,7 +26,7 @@ class ExchangesView extends Component {
           <td>{exchange.symbol}</td>
           <td>{exchange.lastest}</td>
           <td>
-						<Button className="NewNode-button-shutdown pull-right" bsStyle={exchange.enabled ? "danger" : "success"} onClick={this.handleExchangeToggle.bind(this, exchange)}>{exchange.enabled ? "Off" : "On"}</Button>
+						<Button className="NewNode-button-shutdown pull-right" bsStyle={exchange.enabled ? "danger" : "success"} onClick={this.props.onExchangeToggle.bind(this.props.owner, exchange)}>{exchange.enabled ? "Off" : "On"}</Button>
 		      </td>
         </tr>
       )
@@ -54,3 +50,4 @@ class ExchangesView extends Component {
 }
 
 export default ExchangesView
+//						<Button className="NewNode-button-shutdown pull-right" bsStyle={exchange.enabled ? "danger" : "success"} onClick={this.handleExchangeToggle.bind(this, exchange)}>{exchange.enabled ? "Off" : "On"}</Button>

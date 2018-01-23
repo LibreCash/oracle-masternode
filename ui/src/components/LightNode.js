@@ -39,6 +39,13 @@ class LightNode extends Component {
     dispatch( nodeOp({ code: 'simulate', cmd: 'testRandomPrice', id: this.props.node.id }) )
   }
 
+  onExchangeToggle (exchange) {
+    console.log(exchange)
+    console.log(this.props.node.id)
+    const { dispatch } = this.context.store
+    dispatch( nodeOp({ code: 'exchange.onoff', cmd: exchange.enabled ? 'off' : 'on', id: this.props.node.id, exchangeId: exchange.id}) )
+  }
+
   render() {
     var node = this.props.node
 
@@ -94,7 +101,7 @@ class LightNode extends Component {
           </Row>
           <Row>
             <h3>Exchanges</h3>
-            <ExchangesView exchanges={exchanges} />
+            <ExchangesView exchanges={exchanges} onExchangeToggle={this.onExchangeToggle} owner={this} />
           </Row>
           <Row>
             <h3>Options</h3>
