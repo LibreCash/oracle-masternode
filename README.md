@@ -2,7 +2,7 @@
 
 Masternode of LibreBank.
 
-Written on NodeJS, React and Redux with love :)
+Written on NodeJS with love :)
 
 
 ## Requirements
