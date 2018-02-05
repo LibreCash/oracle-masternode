@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
 
-import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
+import { Panel, Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import Notifications from './Notifications'
 import PriceChart from './PriceChart'
@@ -77,49 +77,47 @@ class LightNode extends Component {
 
     return (
       <div className="LightNode">
-        <Grid>
-          <Row>
-            <Col xs={6} md={6}>
-              <div className="LightNode-label0">LightNode {node.id}</div>
-              <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
-            </Col>
-            <Col xs={2} md={2}>
-              <Button className="pull-left" bsStyle="success" disabled={!node.connected} onClick={this.onApplyCommand.bind(this)}>Apply</Button>
-            </Col>
-            <Col xs={4} md={4}>
-              <Button className="LightNode-button-shutdown pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
-              {true ? 
-                  <Button className="LightNode-button-stop pull-right" bsStyle="warning" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
-                :
-                  <Button className="LightNode-button-start pull-right" bsStyle="success" disabled={!node.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
-              }
-            </Col>
-          </Row>
-          <Row>
-            <h3>Ethereum</h3>
-            <EthView eth={node.state.eth} />
-          </Row>
-          <Row>
-            <h3>Exchanges</h3>
-            <ExchangesView exchanges={exchanges} onExchangeToggle={this.onExchangeToggle} owner={this} />
-          </Row>
-          <Row>
-            <h3>Options</h3>
-            {fieldsOptions}
-            <h3>State</h3>
-            {fieldsState}
-            <h3>Master State</h3>
-            {fields}
-          </Row>
-          <Row>
-            <h3>Notifications</h3>
-            <Notifications notifications={notifications} />
-          </Row>
-          <Row>
-            <h3>Audit Actions</h3>
-            <ActionsHistory actions={actions} />
-          </Row>
-        </Grid>
+        <Panel>
+          <Col xs={6} md={6}>
+            <div className="LightNode-label0">LightNode {node.id}</div>
+            <div className="LightNode-connected"style={connected.style}>{connected.text}</div>
+          </Col>
+          <Col xs={2} md={2}>
+            <Button className="pull-left" bsStyle="success" disabled={!node.connected} onClick={this.onApplyCommand.bind(this)}>Apply</Button>
+          </Col>
+          <Col xs={4} md={4}>
+            <Button className="LightNode-button-shutdown pull-right" bsStyle="danger" disabled={!node.connected} onClick={this.onShutdownClick.bind(this)}>Shutdown</Button>
+            {true ? 
+                <Button className="LightNode-button-stop pull-right" bsStyle="warning" disabled={!node.connected} onClick={this.onStopClick.bind(this)}>Stop</Button>
+              :
+                <Button className="LightNode-button-start pull-right" bsStyle="success" disabled={!node.connected} onClick={this.onStartClick.bind(this)}>Start</Button>
+            }
+          </Col>
+        </Panel>
+        <Panel>
+          <h3>Ethereum</h3>
+          <EthView eth={node.state.eth} />
+        </Panel>
+        <Panel>
+          <h3>Exchanges</h3>
+          <ExchangesView exchanges={exchanges} onExchangeToggle={this.onExchangeToggle} owner={this} />
+        </Panel>
+        <Panel>
+          <h3>Options</h3>
+          {fieldsOptions}
+          <h3>State</h3>
+          {fieldsState}
+          <h3>Master State</h3>
+          {fields}
+        </Panel>
+        <Panel>
+          <h3>Notifications</h3>
+          <Notifications notifications={notifications} />
+        </Panel>
+        <Panel>
+          <h3>Audit Actions</h3>
+          <ActionsHistory actions={actions} />
+        </Panel>
       </div>
     )
   }

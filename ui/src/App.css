@@ -1,3 +1,7 @@
+.help-block {
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -8,8 +12,14 @@
 }
 
 .App-header {
-  background-color: #fcf8e3;
-  color: orange;
+  background-color: #000;
+  font-color: #FEBF00;
+  color: #FEBF00;
+}
+
+.App-header h1 {
+  font-color: #FEBF00;
+  color: #FEBF00;
 }
 
 .App-title {

@@ -49,44 +49,63 @@ class NodesView extends Component {
 
     return (
       <div className="NodesView">
-        <h3>Nodes</h3>
-        <Panel>
           <Panel>
-            <Form inline className="pull-left">
-              <FormGroup>
-                <ControlLabel>Name:</ControlLabel>
-                <FormControl inputRef={ref => {this.refNewNodeName = ref; }} />
+            <h2>Add new Lightnode</h2>
+            <Form horizontal>
+              <FormGroup controlId="formHorizontalName">
+                <Col componentClass={ControlLabel} sm={2}>
+                  <ControlLabel>Name</ControlLabel>
+                </Col>
+                <Col sm={10}>
+                  <FormControl id="formHorizontalName" inputRef={ref => {this.refNewNodeName = ref; }} />
+                </Col>
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Url:</ControlLabel>
-                <FormControl inputRef={ref => {this.refNewNodeUrl = ref; }} />
+                <Col componentClass={ControlLabel} sm={2}>
+                  <ControlLabel>URL</ControlLabel>
+                </Col>
+                <Col sm={10}>
+                  <FormControl inputRef={ref => {this.refNewNodeUrl = ref; }} />
+                </Col>
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Login:</ControlLabel>
-                <FormControl inputRef={ref => {this.refNewNodeLogin = ref; }} />
+                <Col componentClass={ControlLabel} sm={2}>
+                  <ControlLabel>Login</ControlLabel>
+                </Col>
+                <Col sm={10}>
+                  <FormControl inputRef={ref => {this.refNewNodeLogin = ref; }} />
+                </Col>
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Password:</ControlLabel>
-                <FormControl inputRef={ref => {this.refNewNodePassword = ref; }} />
+                <Col componentClass={ControlLabel} sm={2}>
+                  <ControlLabel>Password</ControlLabel>
+                </Col>
+                <Col sm={10}>
+                  <FormControl inputRef={ref => {this.refNewNodePassword = ref; }} />
+                </Col>
               </FormGroup>
-              <Button className="NewNode-button-shutdown pull-right" onClick={this.onAddNode.bind(this)}>Add</Button>
+              <Col smOffset={2} sm={10}>
+                <Button className="NewNode-button-shutdown pull-left" bsStyle="success" onClick={this.onAddNode.bind(this)}>Add</Button>
+              </Col>
             </Form>
           </Panel>
-          <Table className="NodesTable" striped bordered condensed hover>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>hardcoded</th>
-                <th>url</th>
-                <th>status</th>
-                <th>control</th>
-              </tr>
-            </thead>
-            <tbody>
-              {nodes}
-            </tbody>
-          </Table>
-        </Panel>
+          <Panel>
+            <h3>Lightnodes</h3>
+            <Table className="NodesTable" striped bordered condensed hover>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>hardcoded</th>
+                  <th>url</th>
+                  <th>status</th>
+                  <th>control</th>
+                </tr>
+              </thead>
+              <tbody>
+                {nodes}
+              </tbody>
+            </Table>
+          </Panel>
       </div>
     )
   }

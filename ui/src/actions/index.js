@@ -1,6 +1,13 @@
 export const [ 
 	STARTUP,
 
+	// internal
+	MASTRERNODES_LIST_UPDATED,
+
+	// network
+  START_WEBSOCKET,
+  STOP_WEBSOCKET,
+
 	// masternode recv
 	MASTER_CONNECTED,
 	MASTER_DISCONNECTED,
@@ -20,6 +27,9 @@ export const [
 
 ] = [
 	'STARTUP',
+	'MASTRERNODES_LIST_UPDATED',
+  'START_WEBSOCKET',
+  'STOP_WEBSOCKET',
 	'MASTER_CONNECTED',
 	'MASTER_DISCONNECTED',
 	'MASTER_STATE',
@@ -73,3 +83,17 @@ export const masterOn = payload => ({
 	payload
 })
 
+export const startWebsocket = payload => ({
+	type: 'START_WEBSOCKET',
+	payload
+})
+
+export const stopWebsocket = payload => ({
+	type: 'STOP_WEBSOCKET',
+	payload
+})
+
+export const masternodesListUpdated = payload => ({
+	type: 'MASTRERNODES_LIST_UPDATED',
+	payload
+})

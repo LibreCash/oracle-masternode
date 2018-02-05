@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
 
-import { Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
+import { Panel, Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
 import { renderObjectProps } from '../utils'
 
@@ -108,21 +108,20 @@ class EthView extends Component {
 
     return (
       <div className="EthView">
-        <Grid>
-          <Row>
-            <h5>Ethereum Status</h5>
-            <EthStatus status={(eth && eth.status) || []} />
-          </Row>
-          <Row>
+        <Panel>
+          <h5>Ethereum Status</h5>
+          <EthStatus status={(eth && eth.status) || []} />
+        </Panel>
+        <Panel>
             <h5>Ethereum Events</h5>
             <EthViewEvents events={eth ? eth.events : []} />
-          </Row>
-          <Row>
+        </Panel>
+        <Panel>
             <h5>Ethereum Clients</h5>
             <EthViewClients clients={eth ? eth.clients : []} />
-          </Row>
-        </Grid>
-      </div>)
+        </Panel>
+      </div>
+    )
   }
 }
 

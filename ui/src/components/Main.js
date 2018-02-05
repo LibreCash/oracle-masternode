@@ -4,6 +4,8 @@ import MasterNode from './MasterNode';
 
 import { Button } from 'react-bootstrap';
 
+import Setup from './setup/Setup';
+
 
 class Main extends Component {
   componentWillReceiveProps(nextProps) {
@@ -13,8 +15,13 @@ class Main extends Component {
     var ctx = this.props.ctx;
     return (
       <div className="Main">
-        <Button bsStyle="info">INFO</Button>
-        <MasterNode ctx={ this.props.ctx }></MasterNode>
+        {(()=>{
+          if (this.props.ctx.secret) {
+            return <MasterNode ctx={ this.props.ctx }></MasterNode>
+          }
+          else
+            return <Setup ctx={ this.props.ctx} />
+        })()}
       </div>
     );
   }

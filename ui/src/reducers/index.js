@@ -2,6 +2,9 @@ import { combineReducers } from 'redux'
 
 import { 
   STARTUP,
+  MASTRERNODES_LIST_UPDATED,
+  START_WEBSOCKET,
+  STOP_WEBSOCKET,
   MASTER_CONNECTED,
   MASTER_DISCONNECTED,
   MASTER_STATE,
@@ -18,6 +21,10 @@ import {
 const INITIAL_STATE = {
 	ctx: { 
 		connected: false,
+
+		secret: null,
+
+		masternodes: [],
 
 		master: {
 			state: {
@@ -44,6 +51,30 @@ const startupReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				ctx: {
 					...state.ctx
+				}
+			}
+		case MASTRERNODES_LIST_UPDATED:
+			return {
+				...state,
+				ctx: {
+					...state.ctx,
+					masternodes: action.payload
+				}
+			}
+		case START_WEBSOCKET:
+			return {
+				...state,
+				ctx: {
+					...state.ctx,
+					secret: action.payload
+				}
+			}
+		case STOP_WEBSOCKET:
+			return {
+				...state,
+				ctx: {
+					...state.ctx,
+					secret: null
 				}
 			}
 		case MASTER_CONNECTED:

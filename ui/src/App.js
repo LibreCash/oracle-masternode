@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+//import './bootstrap.min.css'
+//import './bootstrap4.min.css'
+//import './bootstrap3.min.css'
+import './bootstrap-3.3.7-dist/css/bootstrap.min.css'
+import './bootstrap-3.3.7-dist/css/bootstrap-cyborg.min.css'
+import './App.css'
 
-import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap'
 
-import Main from './components/Main';
+import Main from './components/Main'
 
 import { startup, initConnection, nodeOp } from './actions'
+
+//import Image from './630a.png'
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +35,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to LibreBank UI Developer</h1>
+          <h1 className="App-title">LibreBank Oracles Admin</h1>
         </header>
 
         <Main ctx={ this.props.ctx }></Main>

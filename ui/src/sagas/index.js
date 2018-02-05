@@ -121,6 +121,7 @@ function* internalListener(socket) {
 
 function* wsHandling() {
   while (true) {
+  const data = yield take('START_WEBSOCKET');
 	const socket = yield call(createWebSocketConnection)
 	const socketChannel = yield call(createSocketChannel, socket)
     const { cancel } = yield race({
