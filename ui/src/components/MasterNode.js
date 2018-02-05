@@ -102,12 +102,12 @@ class MasterNode extends Component {
                 {fields}
               </Panel>
               <Panel>
-                <h3>Last Prices</h3>
-                <PricesView prices={lastPrices} />
-              </Panel>
-              <Panel>
                 <h3>Lightnodes</h3>
                 <LightnodesStates lightnodes={ctx.lightNodes} />
+              </Panel>
+              <Panel>
+                <h3>Last Prices</h3>
+                <PricesView prices={lastPrices} />
               </Panel>
               <Panel>
                 <h3>Notifications</h3>
