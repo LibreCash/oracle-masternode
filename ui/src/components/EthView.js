@@ -38,7 +38,7 @@ class EthStatus extends Component {
 
 class EthViewEvents extends Component {
   render() {
-    var events = []
+    var events = [];
 
     (this.props.events || []).forEach((event) => {
       var details = event.length > 1 ? event.slice(1) : null
