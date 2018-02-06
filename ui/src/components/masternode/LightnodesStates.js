@@ -20,7 +20,7 @@ class LightnodesStates extends Component {
 	render () {
 		var lightnodes = []
     for (let lightnode of this.props.lightnodes) {
-    	console.log(lightnode)
+//    	console.log(lightnode)
     	var eth = (lightnode.state && lightnode.state.eth) || {}
     	var state = lightnode.state || {}
     	lightnodes.push(

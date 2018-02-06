@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 
 import { Panel, Button, Label, Grid, Row, Col, Table } from 'react-bootstrap'
 
-import { renderObjectProps } from '../utils'
+import { renderObjectProps, renderObjectPropsRecursive } from '../utils'
 
 // ETHEREUM
 // CLIENTS
@@ -39,28 +39,47 @@ class EthStatus extends Component {
 class EthViewEvents extends Component {
   render() {
     var events = []
+
     this.props.events.forEach((event) => {
+      var details = event.length > 1 ? event.slice(1) : null
+      var code = details.length > 0 ? details[0] : null
+
+      var detailsProps = details.length > 1 ? details[1] : {}
+
+      var fieldsDetails = renderObjectPropsRecursive(detailsProps)
+
       events.push(
-        <tr>
-          <td>{event[0]}</td>
-          <td>{JSON.stringify(event.length > 1 ? event.slice(1) : null)}</td>
-        </tr>
+        <Row>
+          <Col sm={1}>
+            {event[0]}
+          </Col>
+          <Col sm={2}>
+            {code}
+          </Col>
+          <Col sm={9}>
+            {fieldsDetails}
+          </Col>
+        </Row>
       )
     })
 
     return (
-      <Table id="tableEthViewEvents" className="EthViewEventsTable" striped bordered condensed hover>
-        <thead>
-          <tr>
-            <th>Eth</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {events}
-        </tbody>
-      </Table>
+      <div>
+        <Row>
+          <Col sm={1}>
+            ETH
+          </Col>
+          <Col sm={2}>
+            Code
+          </Col>
+          <Col sm={9}>
+            Details
+          </Col>
+        </Row>
+        {events}
+      </div>
     )
+
   }
 }
 
