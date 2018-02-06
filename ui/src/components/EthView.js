@@ -40,7 +40,7 @@ class EthViewEvents extends Component {
   render() {
     var events = []
 
-    this.props.events.forEach((event) => {
+    (this.props.events || []).forEach((event) => {
       var details = event.length > 1 ? event.slice(1) : null
       var code = details.length > 0 ? details[0] : null
 
