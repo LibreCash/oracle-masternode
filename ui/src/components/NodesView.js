@@ -1,3 +1,6 @@
+// todo: review & sync coding style with new methods
+// note: disabled until next fix
+
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
 import { Button, Label, Grid, Row, Col, Table, Panel, Form, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
@@ -28,9 +31,8 @@ class NodesView extends Component {
   	var nodes0 = [{
   		id: '0',
   		isHardConfigured: true,
-  		host: 'localhost',
-  		port: 12345,
-  		status: 'offline'
+  		url: 'http://localhost:27925/',
+  		status: 'hidden'
   	}]
     var nodes = []
 
@@ -40,9 +42,9 @@ class NodesView extends Component {
         <tr>
           <td>{node.id}</td>
           <td>{node.isHardConfigured ? '+' : ''}</td>
-          <td>{`${node.host}:${nodes.port}`}</td>
+          <td>{`${node.url}`}</td>
           <td>{node.status}</td>
-          <td><Button className="NewNode-button-shutdown pull-right" bsStyle="danger" onClick={this.onRemoveNode.bind(this, node.id)}>Delete</Button></td>
+          <td><Button disabled className="NewNode-button-shutdown pull-right" bsStyle="danger" onClick={this.onRemoveNode.bind(this, node.id)}>Delete</Button></td>
         </tr>
       )
     })
@@ -57,7 +59,7 @@ class NodesView extends Component {
                   <ControlLabel>Name</ControlLabel>
                 </Col>
                 <Col sm={10}>
-                  <FormControl id="formHorizontalName" inputRef={ref => {this.refNewNodeName = ref; }} />
+                  <FormControl disabled id="formHorizontalName" inputRef={ref => {this.refNewNodeName = ref; }} />
                 </Col>
               </FormGroup>
               <FormGroup>
@@ -65,7 +67,7 @@ class NodesView extends Component {
                   <ControlLabel>URL</ControlLabel>
                 </Col>
                 <Col sm={10}>
-                  <FormControl inputRef={ref => {this.refNewNodeUrl = ref; }} />
+                  <FormControl disabled inputRef={ref => {this.refNewNodeUrl = ref; }} />
                 </Col>
               </FormGroup>
               <FormGroup>
@@ -73,7 +75,7 @@ class NodesView extends Component {
                   <ControlLabel>Login</ControlLabel>
                 </Col>
                 <Col sm={10}>
-                  <FormControl inputRef={ref => {this.refNewNodeLogin = ref; }} />
+                  <FormControl disabled inputRef={ref => {this.refNewNodeLogin = ref; }} />
                 </Col>
               </FormGroup>
               <FormGroup>
@@ -81,11 +83,11 @@ class NodesView extends Component {
                   <ControlLabel>Password</ControlLabel>
                 </Col>
                 <Col sm={10}>
-                  <FormControl inputRef={ref => {this.refNewNodePassword = ref; }} />
+                  <FormControl disabled inputRef={ref => {this.refNewNodePassword = ref; }} />
                 </Col>
               </FormGroup>
               <Col smOffset={2} sm={10}>
-                <Button className="NewNode-button-shutdown pull-left" bsStyle="success" onClick={this.onAddNode.bind(this)}>Add</Button>
+                <Button disabled className="NewNode-button-shutdown pull-left" bsStyle="success" onClick={this.onAddNode.bind(this)}>Add</Button>
               </Col>
             </Form>
           </Panel>
@@ -94,11 +96,11 @@ class NodesView extends Component {
             <Table className="NodesTable" striped bordered condensed hover>
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>hardcoded</th>
-                  <th>url</th>
-                  <th>status</th>
-                  <th>control</th>
+                  <th>ID</th>
+                  <th>Static</th>
+                  <th>URL</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
