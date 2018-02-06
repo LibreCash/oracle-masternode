@@ -21,10 +21,13 @@ import {
 
 import config from '../config/config'
 
-var JWT_TOKEN = jwt.sign(config.jwt.profile, config.jwt.secret, {})
+var JWT_PROFILE = config.jwt.profile
+var JWT_TOKEN
+// = jwt.sign(config.jwt.profile, config.jwt.secret, {})
 
-function createWebSocketConnection() {
-	const socket = openSocket(config.ws);
+function createWebSocketConnection(options) {
+	JWT_TOKEN = jwt.sign(JWT_PROFILE, options.secret, {})
+	const socket = openSocket(options.url);
 	return socket
 }
 
@@ -122,7 +125,7 @@ function* internalListener(socket) {
 function* wsHandling() {
   while (true) {
   const data = yield take('START_WEBSOCKET');
-	const socket = yield call(createWebSocketConnection)
+	const socket = yield call(createWebSocketConnection, data.payload)
 	const socketChannel = yield call(createSocketChannel, socket)
     const { cancel } = yield race({
       task: [

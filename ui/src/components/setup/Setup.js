@@ -142,7 +142,10 @@ class Setup extends Component {
 
 		  // connect
       const { dispatch } = this.context.store
-	    dispatch( startWebsocket( secret ))
+	    dispatch( startWebsocket({
+	    	url: masternode.url,
+	    	secret 
+	    }))
   	}
 	}
 
