@@ -41,8 +41,8 @@ class EthViewEvents extends Component {
     var events = [];
 
     (this.props.events || []).forEach((event) => {
-      var details = event.length > 1 ? event.slice(1) : null
-      var code = details.length > 0 ? details[0] : null
+      var details = event.length > 1 ? event.slice(1) : []
+      var code = details.length > 0 ? details[0] : ""
 
       var detailsProps = details.length > 1 ? details[1] : {}
 
@@ -51,10 +51,10 @@ class EthViewEvents extends Component {
       events.push(
         <Row>
           <Col sm={1}>
-            {event[0]}
+            {JSON.stringify(event[0])}
           </Col>
           <Col sm={2}>
-            {code}
+            {JSON.stringify(code)}
           </Col>
           <Col sm={9}>
             {fieldsDetails}
@@ -91,9 +91,12 @@ class EthViewClients extends Component {
       clients.push(
         <tr>
           <td>{client.name}</td>
-          <td>{client.url}</td>
           <td>{JSON.stringify(client.connected)}</td>
           <td>{JSON.stringify(client.active)}</td>
+          <td>{JSON.stringify(client.running)}</td>
+          <td>{client.balance}</td>
+          <td>{JSON.stringify(client.locked)}</td>
+          <td>{client.lastError}</td>
           <td>{client.lastPrice}</td>
           <td>{client.lastUpdate}</td>
         </tr>
@@ -105,9 +108,12 @@ class EthViewClients extends Component {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Url</th>
             <th>Connected</th>
             <th>Active</th>
+            <th>Running</th>
+            <th>Balance</th>
+            <th>Locked</th>
+            <th>LastError</th>
             <th>LastPrice</th>
             <th>LastUpdate</th>
           </tr>
