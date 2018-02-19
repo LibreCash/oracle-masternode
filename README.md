@@ -10,6 +10,7 @@ Written on NodeJS with love :)
 2. Build essentials package to your OS (needed for building some deps)
 For Debian-based linux you need intall `build-essential` package by apt.
 For Windows: latest `Visual Studio C++ compiler`.
+3. MongoDB 3.0.12+
 
 ## Getting Started
 Simple clone this repo and install deps using npm
