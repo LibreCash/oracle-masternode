@@ -1,3 +1,9 @@
+<h1 align="center">
+    <img width="300" src="http://librebank.com/img/logo-black.svg" alt="LibreBank Logo">
+    <br>
+    <br>
+</h1>
+
 # LibreBank Oracle Masternode
 
 Masternode of LibreBank.
