@@ -20,11 +20,10 @@ npm install
 ```
 Run
 ```
-node cli/masternode-cli.js
+node cli/masternode-cli.js [-- config <config>] [--section <section>]
 ```
 Options
 ```
-<config>] [--section <section>]
   --config - config (default: ../config/default.json)
   --section - config section (default: masternode0)
 ```
