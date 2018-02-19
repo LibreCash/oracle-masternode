@@ -14,7 +14,7 @@ For Windows: latest `Visual Studio C++ compiler`.
 ## Getting Started
 Simple clone this repo and install deps using npm
 ```
-git clone https://github.com/LibreCash/oracle-masternode
+git clone --recurse-submodules https://github.com/LibreCash/oracle-masternode
 cd oracle-masternode
 npm install
 ```
