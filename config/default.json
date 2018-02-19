@@ -1,0 +1,54 @@
+{
+"masternode0":{
+    "id": "M0",
+    "rc_port": 27999,
+    "pingRate": 10,
+    "requestRetryCount": 10,
+	"reconnectTimeout": 15,
+	"updateTimeout": 5,
+    "lightnodes": [
+        {
+            "name": "L-0",
+            "description": "Alpha node",
+            "secret": "secret",
+            "host": "localhost",
+            "port": 27925
+        },
+        {
+            "name": "L-1",
+            "description": "Beta node",
+            "secret": "secret",
+            "host": "localhost",
+            "port": 27950
+        }
+    ],
+    "db": "mongodb://localhost/masternode0",
+    "remoteControl": {
+        "jwt": {
+            "secret": "secret",
+            "timeout": 15
+        }
+    },
+
+    "mail": {
+        "useTestAccount": false,
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "secure": true,
+        "auth": {
+            "user": "user12345678",
+            "pass": "pass12354678"
+        },
+        "from": "\"MasterNode0 👻\" <foo@librebank.com>",
+        "to": "neo-crypt@neo-crypt.ai"
+    },
+
+    "logLevel": "debug",
+
+    "slack": {
+        "name": "master-0",
+        "token": "",
+        "channel": "ouroracles"
+    }
+}
+}

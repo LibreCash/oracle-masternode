@@ -18,6 +18,16 @@ git clone https://github.com/LibreCash/oracle-masternode
 cd oracle-masternode
 npm install
 ```
+Run
+```
+node cli/masternode-cli.js
+```
+Options
+```
+<config>] [--section <section>]
+  --config - config (default: ../config/default.json)
+  --section - config section (default: masternode0)
+```
 ## Contiributing
 If you want to help us get better - create issue and PR.
 

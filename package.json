@@ -2,21 +2,19 @@
   "name": "masternode",
   "version": "1.0.0",
   "description": "LibreBank masternode",
-  "main": "index.js",
+  "main": "cli/masternode-cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd core && npm install"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/librecrypto/masternode.git"
+    "url": "git+ssh://git@github.com/LibreCash/oracle-masternode.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/librecrypto/masternode#readme",
+  "homepage": "https://github.com/LibreCash/oracle-masternode#readme",
   "dependencies": {
-    "client-sessions": "git+https://github.com/mozilla/node-client-sessions.git",
-    "mongoose": "^4.12.6",
-    "mongoose-encryption": "^1.5.0",
-    "secutil": "^1.0.1"
+    "minimist": "^1.2.0"
   }
 }

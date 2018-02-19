@@ -1,0 +1,3 @@
+[submodule "submodules/oraclecore"]
+	path = core
+	url = git@github.com:LibreCash/oracle-core.git
